@@ -8,7 +8,7 @@
 
 
 # 文字检测
-[文本检测参考:](https://github.com/eragonruan/text-detection-ctpn) 或者参考作者的博客[blog](http://slade-ruan.me/2017/10/22/text-detection-ctpn/)
+[文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn) [blog](http://slade-ruan.me/2017/10/22/text-detection-ctpn/
 
 # OCR 端到端识别:GRU+CTC
 ## ocr识别采用GRU+CTC端到到识别技术，实现不分隔识别不定长文字
