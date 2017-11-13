@@ -3,7 +3,7 @@
 ## cython nms
 ## python2.7
 ## tensorflow=1.3
-## keras==2.0.8 or pytorch=0.2.0
+## keras=2.0.8 or pytorch=0.2.0
 ## 安装运行 sh setup.sh
 
 
