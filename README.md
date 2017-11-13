@@ -18,8 +18,11 @@
 
 # 识别结果展示
 ## 文字检测及OCR识别结果
-![](https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp.jpg) 
-![](https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp.png) 
+<div>
+<img width="300" height="300" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp.jpg"/>
+<img width="300" height="300" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp.png"/>
+</div>
+
 <div>
 <img width="300" height="300" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp.jpg"/>
 <img width="300" height="300" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp.png"/>
