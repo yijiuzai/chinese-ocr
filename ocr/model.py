@@ -90,9 +90,9 @@ def predict(im):
     out = u''.join([characters[x] for x in out[0]])
     if len(out)>0:
         while out[0]==u'。':
-            if len(out)>0:
+            if len(out)>1:
                out = out[1:]
             else:
-                return out
+                break
 
     return out
