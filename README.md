@@ -17,11 +17,11 @@ cd train & sh train-pytorch.sh
 
 # 文字检测
 [文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn) [blog](http://slade-ruan.me/2017/10/22/text-detection-ctpn/
+在原作者的代码基础上修改编译代码，新增支持CPU模式下的文字检测，详见:https://github.com/chineseocr/new-text-detection-ctpn.git   
 
 # OCR 端到端识别:GRU+CTC
 ## ocr识别采用GRU+CTC端到到识别技术，实现不分隔识别不定长文字
-
-
+提供keras 与pytorch版本的训练代码，在理解keras的基础上，可以切换到pytorch版本，此版本更稳定   
 
 
 # 识别结果展示
