@@ -79,6 +79,6 @@ if __name__=='__main__':
     model.fit_generator(gen(train_loader), 
                     steps_per_epoch=10240, 
                     epochs=200,
-                    validation_data=gen(train_loader),
+                    validation_data=gen(test_loader),
                     callbacks=[checkpointer,rlu],
                     validation_steps=1024)
