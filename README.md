@@ -7,11 +7,12 @@
 ## 安装运行 sh setup.sh
 
 # 模型训练参考
-cd train
+
 ## 训练keras版本的crnn   
-sh train-keras.sh   
+
+cd train & sh train-keras.sh   
 ## 训练pytorch版本的crnn   
-sh train-pytorch.sh   
+cd train & sh train-pytorch.sh   
 
 
 # 文字检测
