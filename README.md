@@ -2,21 +2,28 @@
 
 # 实现功能
 
--[] 文字方向检测 0、90、180、270度检测 (运用vgg16分类模型实现，正在整理中)
--[x] 文字检测
--[x] 不定长OCR识别 
+- [ ]  文字方向检测 0、90、180、270度检测 (运用vgg16分类模型实现，正在整理中)
+- [x] 文字检测
+- [x] 不定长OCR识别 
 
 ## 环境部署
-### 运行 sh setup.sh
+``` Bash
+sh setup.sh
+```
 
 # 模型训练
 
 ## 训练keras版本的crnn   
 
+``` Bash
 cd train & sh train-keras.sh   
-## 训练pytorch版本的crnn   
-cd train & sh train-pytorch.sh   
+```
 
+## 训练pytorch版本的crnn   
+
+``` Bash
+cd train & sh train-pytorch.sh   
+```
 
 # 文字检测
 [文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn)   
