@@ -38,7 +38,10 @@ cd train & sh train-pytorch.sh
 <img width="300" height="300" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp1.png"/>
 </div>
 ## 参考
-1.crnn [https://github.com/meijieru/crnn.pytorch.git](https://github.com/meijieru/crnn.pytorch.git)   
-2.keras crnn 版本实现 [https://www.zhihu.com/question/59645822](https://www.zhihu.com/question/59645822)   
-3.ctpn [https://github.com/eragonruan/text-detection-ctpn] (https://github.com/eragonruan/text-detection-ctpn),https://github.com/tianzhi0549/CTPN
+1.crnn https://github.com/meijieru/crnn.pytorch.git       
+
+2.keras crnn 版本实现 https://www.zhihu.com/question/59645822       
+
+3.ctpn https://github.com/eragonruan/text-detection-ctpn , https://github.com/tianzhi0549/CTPN   
+
 
