@@ -15,7 +15,7 @@ train_loader = torch.utils.data.DataLoader(
 
 testSize = 64
 test_loader = torch.utils.data.DataLoader(
-    train_dataset, batch_size=testSize,
+    test_dataset, batch_size=testSize,
     shuffle=True, sampler=sampler,
     num_workers=int(workers),
     collate_fn=dataset.alignCollate(imgH=imgH, imgW=imgW, keep_ratio=keep_ratio))

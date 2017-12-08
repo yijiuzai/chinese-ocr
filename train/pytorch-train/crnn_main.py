@@ -20,8 +20,8 @@ import models.crnn as crnn
 #alphabet += u''.join(list(set(newChars) - set(alphabet)))
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--trainroot', help='path to dataset',default='../trainval/data')
-parser.add_argument('--valroot', help='path to dataset',default='../trainval/data')
+parser.add_argument('--trainroot', help='path to dataset',default='../data/lmdb/train')
+parser.add_argument('--valroot', help='path to dataset',default='../data/lmdb/val')
 parser.add_argument('--workers', type=int, help='number of data loading workers', default=4)
 parser.add_argument('--batchSize', type=int, default=128, help='input batch size')
 parser.add_argument('--imgH', type=int, default=32, help='the height of the input image to network')
