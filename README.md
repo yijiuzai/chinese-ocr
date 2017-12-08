@@ -1,12 +1,8 @@
 # 本文基于tensorflow、keras/pytorch实现对自然场景的文字检测及端到端的OCR中文文字识别
 ## 环境部署
-## cython nms
-## python2.7
-## tensorflow=1.3
-## keras=2.0.8 or pytorch=0.2.0
-## 安装运行 sh setup.sh
+### 运行 sh setup.sh
 
-# 模型训练参考
+# 模型训练
 
 ## 训练keras版本的crnn   
 
