@@ -52,7 +52,7 @@ cd train & sh train-pytorch.sh
 
 1.crnn https://github.com/meijieru/crnn.pytorch.git       
 
-2.keras crnn 版本实现 https://www.zhihu.com/question/59645822       
+2.keras-crnn 版本实现参考 https://www.zhihu.com/question/59645822       
 
 3.ctpn https://github.com/eragonruan/text-detection-ctpn , https://github.com/tianzhi0549/CTPN   
 
