@@ -4,7 +4,7 @@ model,basemodel = get_model(height=imgH, nclass=nclass)
 import os
 modelPath = '../pretrain-models/keras.hdf5'
 if os.path.exists(modelPath):
-       model.load_weights(modelPath)
+       basemodel.load_weights(modelPath)
         
 batchSize = 128
 train_loader = torch.utils.data.DataLoader(
@@ -43,7 +43,7 @@ for i in range(3):
                         loss = crrentLoss
                         path = 'save_model/model{}.h5'.format(loss)
                         print "save model:".format(path)
-                        model.save(path)
+                        basemodel.save(path)
 
                 j+=1
                 

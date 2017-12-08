@@ -70,8 +70,9 @@ if __name__=='__main__':
     model,basemodel = get_model(height=imgH, nclass=nclass)
     import os
     if os.path.exists('pretrain-models/keras.hdf5'):
-       model.load_weights('pretrain-models/keras.hdf5')
-
+       basemodel.load_weights('pretrain-models/keras.hdf5')
+    
+    ##注意此处保存的是model的权重
     checkpointer = ModelCheckpoint(filepath="save_model/model{epoch:02d}-{val_loss:.4f}.hdf5",monitor='val_loss',         verbose=0,save_weights_only=False, save_best_only=True)
     rlu = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=1, verbose=0, mode='auto', epsilon=0.0001, cooldown=0, min_lr=0)
 
