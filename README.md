@@ -16,7 +16,8 @@ cd train & sh train-pytorch.sh
 
 
 # 文字检测
-[文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn) [blog](http://slade-ruan.me/2017/10/22/text-detection-ctpn/
+[文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn)   
+
 在原作者的代码基础上修改编译代码，新增支持CPU模式下的文字检测，详见:https://github.com/chineseocr/new-text-detection-ctpn.git   
 
 # OCR 端到端识别:GRU+CTC
@@ -36,3 +37,8 @@ cd train & sh train-pytorch.sh
 <img width="300" height="300" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp1.jpg"/>
 <img width="300" height="300" src="https://github.com/chineseocr/chinses-ocr/blob/master/img/tmp1.png"/>
 </div>
+## 参考
+1.crnn [https://github.com/meijieru/crnn.pytorch.git](https://github.com/meijieru/crnn.pytorch.git)
+2.keras crnn 版本实现 [https://www.zhihu.com/question/59645822](https://www.zhihu.com/question/59645822)
+3.ctpn [https://github.com/eragonruan/text-detection-ctpn](https://github.com/eragonruan/text-detection-ctpn),https://github.com/tianzhi0549/CTPN
+
