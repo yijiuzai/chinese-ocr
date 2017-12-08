@@ -6,6 +6,13 @@
 ## keras=2.0.8 or pytorch=0.2.0
 ## 安装运行 sh setup.sh
 
+# 模型训练参考
+cd train
+## 训练keras版本的crnn   
+sh train-keras.sh   
+## 训练pytorch版本的crnn   
+sh train-pytorch.sh   
+
 
 # 文字检测
 [文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn) [blog](http://slade-ruan.me/2017/10/22/text-detection-ctpn/

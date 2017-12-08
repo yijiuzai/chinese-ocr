@@ -1,0 +1,83 @@
+# -*- coding: utf-8 -*-
+import torch
+import dataset
+import keys
+import numpy as np
+
+characters = keys.alphabet[:]
+from model import get_model
+
+nclass = len(characters)+1
+
+import keras.backend as K
+
+trainroot = '../data/lmdb/train'
+valroot   = '../data/lmdb/val'
+batchSize = 32
+workers = 4
+imgH = 32
+imgW = 256
+keep_ratio = False
+random_sample = False
+
+
+def one_hot(text,length=10,characters=characters):
+     label = np.zeros(length)
+     for i,char in enumerate(text.decode('utf-8')):
+        index = characters.find(char)
+        if index==-1:
+            index = characters.find(u' ')
+        label[i] = index
+     return label
+
+n_len = 10  
+def gen(loader):
+    while True:
+        i =0 
+        n = len(loader)
+        for X,Y in loader:
+            X = X.numpy()
+            X = X.reshape((-1,imgH,imgW,1))
+            Y = np.array(Y)
+            #Y = Y.numpy()
+            if i>n-1:
+                i = 0
+                break
+                
+            yield [X, Y, np.ones(batchSize)*int(63), np.ones(batchSize)*n_len], np.ones(batchSize)
+        
+if random_sample:
+    sampler = dataset.randomSequentialSampler(train_dataset, batchSize)
+else:
+    sampler = None
+train_dataset = dataset.lmdbDataset(root=trainroot,target_transform=one_hot)
+
+train_loader = torch.utils.data.DataLoader(
+    train_dataset, batch_size=batchSize,
+    shuffle=True, sampler=sampler,
+    num_workers=int(workers),
+    collate_fn=dataset.alignCollate(imgH=imgH, imgW=imgW, keep_ratio=keep_ratio))
+
+test_dataset = dataset.lmdbDataset(
+    root=valroot, transform=dataset.resizeNormalize((imgW, imgH)),target_transform=one_hot)
+
+test_loader = torch.utils.data.DataLoader(
+        test_dataset, shuffle=True, batch_size=batchSize, num_workers=int(workers))
+
+
+if __name__=='__main__':
+    from keras.callbacks import ModelCheckpoint,ReduceLROnPlateau
+    model,basemodel = get_model(height=imgH, nclass=nclass)
+    import os
+    if os.path.exists('pretrain-models/keras.hdf5'):
+       model.load_weights('pretrain-models/keras.hdf5')
+
+    checkpointer = ModelCheckpoint(filepath="save_model/model{epoch:02d}-{val_loss:.4f}.hdf5",monitor='val_loss',         verbose=0,save_weights_only=False, save_best_only=True)
+    rlu = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=1, verbose=0, mode='auto', epsilon=0.0001, cooldown=0, min_lr=0)
+
+    model.fit_generator(gen(train_loader), 
+                    steps_per_epoch=10240, 
+                    epochs=200,
+                    validation_data=gen(train_loader),
+                    callbacks=[checkpointer,rlu],
+                    validation_steps=1024)
