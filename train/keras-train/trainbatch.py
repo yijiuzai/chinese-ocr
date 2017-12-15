@@ -6,19 +6,18 @@ modelPath = '../pretrain-models/keras.hdf5'
 if os.path.exists(modelPath):
        basemodel.load_weights(modelPath)
         
-batchSize = 128
+batchSize = 32
 train_loader = torch.utils.data.DataLoader(
     train_dataset, batch_size=batchSize,
     shuffle=True, sampler=sampler,
     num_workers=int(workers),
     collate_fn=dataset.alignCollate(imgH=imgH, imgW=imgW, keep_ratio=keep_ratio))
 
-testSize = 64
+testSize = 16
+#print test_dataset[0]
 test_loader = torch.utils.data.DataLoader(
     test_dataset, batch_size=testSize,
-    shuffle=True, sampler=sampler,
-    num_workers=int(workers),
-    collate_fn=dataset.alignCollate(imgH=imgH, imgW=imgW, keep_ratio=keep_ratio))
+    shuffle=True, num_workers=int(workers)    )
 
 j = 0
 crrentLoss = 1000
@@ -29,14 +28,20 @@ for i in range(3):
                 X = X.numpy()
                 X = X.reshape((-1,imgH,imgW,1))
                 Y = np.array(Y)
-                X,Y = [X, Y, np.ones(batchSize)*int(63), np.ones(batchSize)*n_len], np.ones(batchSize)    
+                
+                Length = int(imgW/4)-2
+                batch = X.shape[0]
+                X,Y = [X, Y, np.ones(batch)*Length, np.ones(batch)*n_len], np.ones(batch)    
                 model.train_on_batch( X,Y)  
-                if j%interval==0:
+                if j%interval==0 :
                    X,Y  =  next(iter(test_loader))
                    X = X.numpy()
                    X = X.reshape((-1,imgH,imgW,1))
+                   Y = Y.numpy()
                    Y = np.array(Y)
-                   X,Y = [X, Y, np.ones(testSize)*int(63), np.ones(testSize)*n_len], np.ones(testSize) 
+                   batch = X.shape[0]
+                   X,Y = [X, Y, np.ones(batch)*Length, np.ones(batch)*n_len], np.ones(batch) 
+                   
                    crrentLoss = model.evaluate(X,Y)
                    print "step:{},loss:{},crrentLoss:{}".format(j,loss,crrentLoss)
                    if crrentLoss<loss:
