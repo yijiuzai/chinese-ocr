@@ -40,12 +40,13 @@ def gen(loader):
             X = X.reshape((-1,imgH,imgW,1))
             Y = np.array(Y)
             Length = int(imgW/4)-1
+            batchs = X.shape[0]
             #Y = Y.numpy()
             if i>n-1:
                 i = 0
                 break
                 
-            yield [X, Y, np.ones(batchSize)*int(Length), np.ones(batchSize)*n_len], np.ones(batchSize)
+            yield [X, Y, np.ones(batchs)*int(Length), np.ones(batchs)*n_len], np.ones(batchs)
         
 if random_sample:
     sampler = dataset.randomSequentialSampler(train_dataset, batchSize)
