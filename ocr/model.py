@@ -1,21 +1,17 @@
 # -*- coding: utf-8 -*-
+## 修复K.ctc_decode bug 当大量测试时将GPU显存消耗完，导致错误，用decode 替代
+###
 from keras.layers import Input,Conv2D,MaxPooling2D,ZeroPadding2D
 from keras.layers import Flatten,BatchNormalization,Permute,TimeDistributed,Dense,Bidirectional,GRU
 from keras.models import Model
-
-
+from keras.layers import Lambda
+from keras.optimizers import SGD
 import numpy as np
-from PIL import Image
+#from PIL import Image
 import keras.backend  as K
 import keys
 import os
-from keras.models import load_model
-
-
-
-from keras.layers import Lambda
-from keras.optimizers import SGD
-
+#from keras.models import load_model
 
 
 def ctc_lambda_func(args):
@@ -63,18 +59,24 @@ def get_model(height,nclass):
     sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True, clipnorm=5)
     #model.compile(loss={'ctc': lambda y_true, y_pred: y_pred}, optimizer='adadelta')
     model.compile(loss={'ctc': lambda y_true, y_pred: y_pred}, optimizer=sgd)
-    model.summary()
+    #model.summary()
     return model,basemodel
 
 characters = keys.alphabet[:]
 
 
 modelPath = os.path.join(os.getcwd(),"ocr/ocr0.2.h5")
+height = 32
+nclass = len(characters)
 if os.path.exists(modelPath):
-    basemodel = load_model(modelPath)
+    model,basemodel = get_model(height,nclass+1)
+    basemodel.load_weights(modelPath)
     
 
 def predict(im):
+    """
+    
+    """
     im = im.convert('L')
     scale = im.size[1]*1.0 / 32
     w = im.size[0] / scale
@@ -85,9 +87,11 @@ def predict(im):
     X = np.array([X])
     y_pred = basemodel.predict(X)
     y_pred = y_pred[:,2:,:]
-    out = K.get_value(K.ctc_decode(y_pred, input_length=np.ones(y_pred.shape[0])*y_pred.shape[1], )[0][0])[:, :]
+    out    = decode(y_pred)##
+    #out = K.get_value(K.ctc_decode(y_pred, input_length=np.ones(y_pred.shape[0])*y_pred.shape[1], )[0][0])[:, :]
     
-    out = u''.join([characters[x] for x in out[0]])
+    #out = u''.join([characters[x] for x in out[0]])
+    
     if len(out)>0:
         while out[0]==u'。':
             if len(out)>1:
@@ -96,3 +100,14 @@ def predict(im):
                 break
 
     return out
+
+def decode(pred):
+        charactersS = characters+u' '
+        t = pred.argmax(axis=2)[0]
+        length = len(t)
+        char_list = []
+        n = len(characters)
+        for i in range(length):
+            if t[i] != n and (not (i > 0 and t[i - 1] == t[i])):
+                        char_list.append(charactersS[t[i] ])
+        return u''.join(char_list)
