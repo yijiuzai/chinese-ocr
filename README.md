@@ -33,7 +33,7 @@ cd train & sh train-pytorch.sh
 
 # 文字检测
 支持CPU、GPU环境，一键部署，
-[文本检测参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn)   
+[文本检测训练参考](https://github.com/eragonruan/text-detection-ctpn)(https://github.com/eragonruan/text-detection-ctpn)   
  
 
 # OCR 端到端识别:GRU+CTC
